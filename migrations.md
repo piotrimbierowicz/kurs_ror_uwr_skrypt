@@ -24,6 +24,19 @@ Gdyby struktura bazy była przechowywana w całości w pliku `db/schema.rb` mog�
 Framework pamięta, które pliki migracji zostały już uruchomione na danej maszynie i uruchamiając odpowiednie migracje tak zaktualizuje strukturę bazy, 
 a następnie plik `db/schema.rb`, aby obaj programiści mieli tę samą wersję bazy danych.
 
+#### Generowaie pliku migracji
+
+Plik migracji można wygenerować automatycznie (podając parametry takie jak `user_id:integer`):
+```
+rails g migration add_user_id_to_posts user_id:integer
+```
+
+Przy bardziej złożonych migracjach trzeba samodzielnie stworzyć migrację poprzez wygenerowanie pustego pliku:
+```
+rails g migration rename_columns_in_posts_table
+```
+i użycie metod modyfikujących strukturę bazy danych.
+
 #### Polecenia
 
 - `rails db:migrate` - wykonuje wszystkie zaległe migracje
@@ -49,3 +62,20 @@ Jeśli błędna migracja została już wysłana:
 1) Dodajemy migrację z poprawką, np. `rename_column`
 2) Wykonujemy `rails db:migrate`
 3) Commitujemy kod i wysyłamy do zdalnego repozytorium
+
+
+#### Metody dostępne w migracjach
+
+Przykładowe metody:
+
+* `create_table`
+* `add_column`
+* `rename_column`
+* `remove_column`
+* `add_index`
+* `remove_index`
+* `drop_table`
+
+Pełen opis dostępny pod adresem https://api.rubyonrails.org/classes/ActiveRecord/Migration.html
+
+
